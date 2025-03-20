@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.busbackend.mapper.ScheduleMapper">
+    <select id="findById" resultType="com.example.busbackend.entity.Schedule">
+        SELECT id, route_id, vehicle_id, driver_id, departure_time, status, created_at, updated_at
+        FROM schedules WHERE id = #{id}
+    </select>
+    <select id="findAll" resultType="com.example.busbackend.entity.Schedule">
+        SELECT id, route_id, vehicle_id, driver_id, departure_time, status, created_at, updated_at
+        FROM schedules
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO schedules (route_id, vehicle_id, driver_id, departure_time, status, created_at, updated_at)
+        VALUES (#{routeId}, #{vehicleId}, #{driverId}, #{departureTime}, #{status}, #{createdAt}, #{updatedAt})
+    </insert>
+    <update id="update">
+        UPDATE schedules
+        SET route_id = #{routeId}, vehicle_id = #{vehicleId}, driver_id = #{driverId},
+            departure_time = #{departureTime}, status = #{status}, updated_at = #{updatedAt}
+        WHERE id = #{id}
+    </update>
+    <delete id="deleteById">
+        DELETE FROM schedules WHERE id = #{id}
+    </delete>
+    <select id="findByRouteId" resultType="com.example.busbackend.entity.Schedule">
+        SELECT id, route_id, vehicle_id, driver_id, departure_time, status, created_at, updated_at
+        FROM schedules
+        WHERE route_id = #{routeId}
+    </select>
+</mapper>

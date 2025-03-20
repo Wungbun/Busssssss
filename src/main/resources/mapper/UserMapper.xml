@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.busbackend.mapper.UserMapper">
+    <select id="findById" resultType="com.example.busbackend.entity.User">
+        SELECT * FROM users WHERE id = #{id}
+    </select>
+    <select id="findAll" resultType="com.example.busbackend.entity.User">
+        SELECT * FROM users
+    </select>
+    <select id="findByRole" resultType="com.example.busbackend.entity.User">
+        SELECT * FROM users WHERE role = #{role}
+    </select>
+    <select id="findByUsername" resultType="com.example.busbackend.entity.User">
+        SELECT * FROM users WHERE username = #{username}
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO users (username, password, role, name, phone, campus, created_at, updated_at)
+        VALUES (#{username}, #{password}, #{role}, #{name}, #{phone}, #{campus}, #{createdAt}, #{updatedAt})
+    </insert>
+    <update id="update">
+        UPDATE users
+        SET username = #{username}, password = #{password}, role = #{role},
+            name = #{name}, phone = #{phone}, campus = #{campus}, updated_at = #{updatedAt}
+        WHERE id = #{id}
+    </update>
+    <delete id="deleteById">
+        DELETE FROM users WHERE id = #{id}
+    </delete>
+</mapper>

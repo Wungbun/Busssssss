@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.busbackend.mapper.VehicleMapper">
+    <select id="findById" resultType="com.example.busbackend.entity.Vehicle">
+        SELECT * FROM vehicles WHERE id = #{id}
+    </select>
+    <select id="findAll" resultType="com.example.busbackend.entity.Vehicle">
+        SELECT * FROM vehicles
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO vehicles (plate_number, capacity, status)
+        VALUES (#{plateNumber}, #{capacity}, #{status})
+    </insert>
+    <update id="update">
+        UPDATE vehicles
+        SET plate_number = #{plateNumber}, capacity = #{capacity}, status = #{status}
+        WHERE id = #{id}
+    </update>
+    <delete id="deleteById">
+        DELETE FROM vehicles WHERE id = #{id}
+    </delete>
+</mapper>

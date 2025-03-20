@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.busbackend.mapper.RouteMapper">
+    <select id="findById" resultType="com.example.busbackend.entity.Route">
+        SELECT id, start_campus_id, end_campus_id, distance, created_at, updated_at
+        FROM routes
+        WHERE id = #{id}
+    </select>
+    <select id="findAll" resultType="com.example.busbackend.entity.Route">
+        SELECT id, start_campus_id, end_campus_id, distance, created_at, updated_at
+        FROM routes
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO routes (start_campus_id, end_campus_id, distance, created_at, updated_at)
+        VALUES (#{startCampusId}, #{endCampusId}, #{distance}, #{createdAt}, #{updatedAt})
+    </insert>
+    <update id="update">
+        UPDATE routes
+        SET start_campus_id = #{startCampusId},
+            end_campus_id = #{endCampusId},
+            distance = #{distance},
+            updated_at = #{updatedAt}
+        WHERE id = #{id}
+    </update>
+    <delete id="deleteById">
+        DELETE FROM routes WHERE id = #{id}
+    </delete>
+    <select id="findByStartAndEnd" resultType="com.example.busbackend.entity.Route">
+        SELECT id, start_campus_id, end_campus_id, distance, created_at, updated_at
+        FROM routes
+        WHERE start_campus_id = #{startCampusId} AND end_campus_id = #{endCampusId}
+    </select>
+</mapper>

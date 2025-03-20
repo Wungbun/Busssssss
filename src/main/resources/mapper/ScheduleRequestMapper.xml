@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.busbackend.mapper.ScheduleRequestMapper">
+    <select id="findAll" resultType="ScheduleRequest">
+        SELECT * FROM schedule_requests
+    </select>
+    <select id="findById" parameterType="long" resultType="ScheduleRequest">
+        SELECT * FROM schedule_requests WHERE id = #{id}
+    </select>
+    <insert id="insert" parameterType="ScheduleRequest">
+        INSERT INTO schedule_requests (user_id, route_id, requested_time, reason, status, created_at)
+        VALUES (#{userId}, #{routeId}, #{requestedTime}, #{reason}, #{status}, #{createdAt})
+    </insert>
+    <update id="update" parameterType="ScheduleRequest">
+        UPDATE schedule_requests SET user_id = #{userId}, route_id = #{routeId},
+                                     requested_time = #{requestedTime}, reason = #{reason}, status = #{status},
+                                     reviewed_by = #{reviewedBy}, reviewed_at = #{reviewedAt}, updated_at = #{updatedAt}
+        WHERE id = #{id}
+    </update>
+    <delete id="delete" parameterType="long">
+        DELETE FROM schedule_requests WHERE id = #{id}
+    </delete>
+</mapper>
