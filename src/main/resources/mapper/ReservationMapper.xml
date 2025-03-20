@@ -3,7 +3,8 @@
 <mapper namespace="com.example.busbackend.mapper.ReservationMapper">
     <select id="findById" resultType="com.example.busbackend.entity.Reservation">
         SELECT id, user_id, schedule_id, seat_number, status, created_at, updated_at
-        FROM reservations WHERE id = #{id}
+        FROM reservations
+        WHERE id = #{id}
     </select>
     <select id="findAll" resultType="com.example.busbackend.entity.Reservation">
         SELECT id, user_id, schedule_id, seat_number, status, created_at, updated_at
@@ -11,7 +12,13 @@
     </select>
     <select id="findByUserId" resultType="com.example.busbackend.entity.Reservation">
         SELECT id, user_id, schedule_id, seat_number, status, created_at, updated_at
-        FROM reservations WHERE user_id = #{userId}
+        FROM reservations
+        WHERE user_id = #{userId}
+    </select>
+    <select id="findByScheduleId" resultType="com.example.busbackend.entity.Reservation">
+        SELECT id, user_id, schedule_id, seat_number, status, created_at, updated_at
+        FROM reservations
+        WHERE schedule_id = #{scheduleId} AND status = 'confirmed'
     </select>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO reservations (user_id, schedule_id, seat_number, status, created_at, updated_at)
@@ -19,8 +26,11 @@
     </insert>
     <update id="update">
         UPDATE reservations
-        SET user_id = #{userId}, schedule_id = #{scheduleId}, seat_number = #{seatNumber},
-            status = #{status}, updated_at = #{updatedAt}
+        SET user_id = #{userId},
+            schedule_id = #{scheduleId},
+            seat_number = #{seatNumber},
+            status = #{status},
+            updated_at = #{updatedAt}
         WHERE id = #{id}
     </update>
     <delete id="deleteById">
