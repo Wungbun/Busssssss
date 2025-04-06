@@ -5,6 +5,7 @@ import com.example.busbackend.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -31,5 +32,19 @@ public class ReservationController {
     @DeleteMapping("/{id}")
     public void deleteReservation(@PathVariable Long id) {
         reservationService.deleteById(id);
+    }
+
+    @PutMapping("/{id}/cancel")
+    public Reservation cancelReservation(@PathVariable Long id) {
+        Reservation reservation = reservationService.findById(id);
+        if (reservation == null) {
+            throw new RuntimeException("预约记录不存在");
+        }
+        if (!reservation.getStatus().equals("confirmed")) {
+            throw new RuntimeException("只能取消已确认的预约");
+        }
+        reservation.setStatus("canceled");
+        reservation.setUpdatedAt(LocalDateTime.now());
+        return reservationService.save(reservation);
     }
 }

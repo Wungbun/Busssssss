@@ -86,4 +86,8 @@ public class ReservationService {
 
         return reservation;
     }
+
+    public Reservation findById(Long id) {
+        return reservationMapper.findById(id);
+    }
 }
