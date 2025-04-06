@@ -16,4 +16,5 @@ public interface ScheduleMapper {
     int deleteById(Long id);
     List<Schedule> findByRouteId(Long routeId);
     List<Schedule> findByDate(@Param("date") LocalDate date);
+    List<Schedule> findByDateAndRoute(@Param("date") LocalDate date, @Param("routeId") Long routeId);
 }

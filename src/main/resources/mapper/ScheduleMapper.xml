@@ -43,4 +43,11 @@
         FROM schedules
         WHERE DATE(departure_time) = #{date}
     </select>
+
+    <select id="findByDateAndRoute" resultType="com.example.busbackend.entity.Schedule">
+        SELECT id, route_id, vehicle_id, driver_id, departure_time, status, created_at, updated_at
+        FROM schedules
+        WHERE DATE(departure_time) = #{date}
+          AND route_id = #{routeId}
+    </select>
 </mapper>

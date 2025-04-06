@@ -60,4 +60,11 @@ public class ScheduleController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return scheduleService.batchCreateSchedules(routeId, vehicleId, driverId, date);
     }
+
+    @GetMapping("/by-date-and-route")
+    public List<Schedule> getSchedulesByDateAndRoute(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+            @RequestParam Long routeId) {
+        return scheduleService.findByDateAndRoute(date, routeId);
+    }
 }

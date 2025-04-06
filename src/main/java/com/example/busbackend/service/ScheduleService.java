@@ -101,4 +101,11 @@ public class ScheduleService {
         logger.info("成功创建 {} 个班次", schedules.size());
         return schedules;
     }
+
+    public List<Schedule> findByDateAndRoute(LocalDate date, Long routeId) {
+        logger.info("查询日期 {} 和线路 {} 的班次...", date, routeId);
+        List<Schedule> schedules = scheduleMapper.findByDateAndRoute(date, routeId);
+        logger.info("查询结果: {}", schedules);
+        return schedules;
+    }
 }

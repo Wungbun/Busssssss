@@ -14,5 +14,7 @@ public class Schedule {
     private String status; // pending, closed, running, completed
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private String vehicleNumber; // 车牌号
+    private String driverName;    // 司机姓
 
 }
