@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.busbackend.mapper.ScheduleMapper">
-    <select id="findById" resultType="com.example.busbackend.entity.Schedule">
+    <!--<select id="findById" resultType="com.example.busbackend.entity.Schedule">
         SELECT id, route_id, vehicle_id, driver_id, departure_time, status, created_at, updated_at
         FROM schedules
         WHERE id = #{id}
+    </select>
+
+    <select id="findById" resultType="com.example.busbackend.entity.Schedule">
+        SELECT s.id, s.route_id, s.vehicle_id, s.driver_id, s.departure_time, s.status, s.created_at, s.updated_at,
+               v.vehicle_number AS vehicleNumber,
+               d.name AS driverName
+        FROM schedules s
+                 LEFT JOIN vehicles v ON s.vehicle_id = v.id
+                 LEFT JOIN drivers d ON s.driver_id = d.id
+        WHERE s.id = #{id}
+    </select>-->
+
+    <select id="findById" resultType="com.example.busbackend.entity.Schedule">
+        SELECT s.id, s.route_id, s.vehicle_id, s.driver_id, s.departure_time, s.status, s.created_at, s.updated_at,
+               v.plate_number AS vehicleNumber,
+               u.name AS driverName
+        FROM schedules s
+                 LEFT JOIN vehicles v ON s.vehicle_id = v.id
+                 LEFT JOIN users u ON s.driver_id = u.id AND u.role = 'driver'
+        WHERE s.id = #{id}
     </select>
 
     <select id="findAll" resultType="com.example.busbackend.entity.Schedule">
